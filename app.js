@@ -38,6 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeDeviceId = DEVICELIST[0].id;
     let activePos = 'bottom-left';
 
+    // --- Page Context Auto-Selection ---
+    const pageContextEl = document.getElementById('page-context');
+    if (pageContextEl && pageContextEl.textContent.trim() !== '{{PAGE_CONTEXT}}' && pageContextEl.textContent.trim() !== '') {
+        const contextStr = pageContextEl.textContent.trim().toLowerCase();
+        // Look for exact device match first, then brand match
+        const exactMatch = DEVICELIST.find(d => d.name.toLowerCase() === contextStr);
+        const brandMatch = DEVICELIST.find(d => d.brand.toLowerCase() === contextStr);
+
+        if (exactMatch) {
+            activeDeviceId = exactMatch.id;
+        } else if (brandMatch) {
+            activeDeviceId = brandMatch.id;
+        }
+    }
+
     // --- Theme Management ---
     themeToggle.addEventListener('click', () => {
         htmlEl.classList.toggle('dark');

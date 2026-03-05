@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AddWatermark - Pro Camera Watermarks</title>
+    <meta name="description" content="{{DESCRIPTION}}">
+    <title>{{TITLE}}</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -242,6 +243,19 @@
         </aside>
 
     </main>
+
+    <!-- SEO Content Section -->
+    <section
+        class="container mx-auto px-4 py-8 prose dark:prose-invert max-w-4xl text-gray-800 dark:text-gray-200 seo-wrapper">
+        {{SEO_CONTENT}}
+    </section>
+
+    <!-- Internal Links Section -->
+    <section class="container mx-auto px-4 py-8 border-t border-gray-200 dark:border-gray-800">
+        {{INTERNAL_LINKS}}
+    </section>
+
+    <div id="page-context" style="display:none;">{{PAGE_CONTEXT}}</div>
 
     <script src="devices.js"></script>
     <script src="canvas.js"></script>

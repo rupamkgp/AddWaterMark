@@ -1,0 +1,30 @@
+{
+  "templates": {
+    "device": {
+      "title": "Add Shot on {{NAME}} Watermark to Photos Online Free",
+      "description": "Easily add a custom Shot on {{NAME}} watermark to your photos. Free online tool, no registration required. High quality professional watermark generator.",
+      "h1": "Shot on {{NAME}} Watermark Generator",
+      "content": "\n        <article class=\"seo-article\">\n          <h2>Why Add a Shot on {{NAME}} Watermark?</h2>\n          <p>Adding a \"Shot on {{NAME}}\" watermark to your photos instantly elevates their appeal, giving them a premium and professional look. Whether you're sharing your photography on social media or building a portfolio, this watermark highlights the quality of your device.</p>\n          \n          <h2>How to Use the {{NAME}} Watermark Generator</h2>\n          <p>Our tool makes it incredibly easy to add a {{NAME}} watermark. Just upload your photo, select the device, customize the photographer name (like \"Shot by John Doe\"), and download your high-resolution watermarked image.</p>\n          \n          <h2>Features of Our Free Online Tool</h2>\n          <ul>\n            <li><strong>100% Free:</strong> No hidden costs or watermarks of our own.</li>\n            <li><strong>High Quality:</strong> We preserve the original resolution of your photos.</li>\n            <li><strong>Customizable:</strong> Change text, logos, and positioning effortlessly.</li>\n          </ul>\n          \n          <h2>Frequently Asked Questions</h2>\n          <h3>Does this reduce picture quality?</h3>\n          <p>No, our tool ensures your downloaded image retains its original quality.</p>\n          <h3>Can I change the \"Shot on\" text?</h3>\n          <p>Yes, you can customize the main text and sub-text to your liking.</p>\n        </article>\n      "
+    },
+    "camera": {
+      "title": "Add Shot on {{NAME}} Watermark to Photos Online Free",
+      "description": "Easily add a custom Shot on {{NAME}} watermark to your photos. Showcase your professional gear with our high-quality watermark generator.",
+      "h1": "Shot on {{NAME}} Watermark Generator",
+      "content": "\n        <article class=\"seo-article\">\n          <h2>Showcase Your Gear with a {{NAME}} Watermark</h2>\n          <p>Professional photographers trust {{NAME}} for its incredible image quality. Now, you can proudly display your gear by adding a \"Shot on {{NAME}}\" watermark to your photos before sharing them online.</p>\n          \n          <h2>How to Add the {{NAME}} Logo to Your Photos</h2>\n          <p>Simply upload your image, pick {{NAME}} from the camera brands list, adjust the watermark settings, and you're ready to download.</p>\n          \n          <h2>Features of Our Free Online Tool</h2>\n          <ul>\n            <li><strong>100% Free:</strong> No hidden costs or watermarks of our own.</li>\n            <li><strong>High Quality:</strong> We preserve the original resolution of your photos.</li>\n            <li><strong>Customizable:</strong> Change text, logos, and positioning effortlessly.</li>\n          </ul>\n        </article>\n      "
+    }
+  },
+  "pages": [
+    { "path": "shot-on-iphone-watermark", "type": "device", "name": "iPhone", "context": "Apple" },
+    { "path": "shot-on-iphone-16-pro-watermark", "type": "device", "name": "iPhone 16 Pro", "context": "Apple" },
+    { "path": "shot-on-iphone-15-pro-max-watermark", "type": "device", "name": "iPhone 15 Pro Max", "context": "Apple" },
+    { "path": "shot-on-samsung-galaxy-s24-ultra-watermark", "type": "device", "name": "Samsung Galaxy S24 Ultra", "context": "Samsung" },
+    { "path": "shot-on-samsung-watermark", "type": "device", "name": "Samsung", "context": "Samsung" },
+    { "path": "shot-on-redmi-watermark", "type": "device", "name": "Redmi", "context": "Xiaomi" },
+    { "path": "shot-on-poco-watermark", "type": "device", "name": "Poco", "context": "Poco" },
+    { "path": "shot-on-oneplus-watermark", "type": "device", "name": "OnePlus", "context": "OnePlus" },
+    { "path": "shot-on-canon-watermark", "type": "camera", "name": "Canon", "context": "Canon" },
+    { "path": "shot-on-nikon-watermark", "type": "camera", "name": "Nikon", "context": "Nikon" },
+    { "path": "shot-on-sony-watermark", "type": "camera", "name": "Sony", "context": "Sony" },
+    { "path": "shot-on-fujifilm-watermark", "type": "camera", "name": "Fujifilm", "context": "Fujifilm" }
+  ]
+}

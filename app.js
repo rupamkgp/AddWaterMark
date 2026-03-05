@@ -53,6 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- Clean up template tags in dev environment ---
+    const seoSection = document.querySelector('.seo-wrapper');
+    if (seoSection) {
+        const content = seoSection.innerHTML.trim();
+        if (content === '{{SEO_CONTENT}}' || content === '') {
+            seoSection.style.display = 'none';
+        }
+    }
+
+    const internalLinksSection = seoSection ? seoSection.nextElementSibling : null;
+    if (internalLinksSection && internalLinksSection.tagName === 'SECTION') {
+        const content = internalLinksSection.innerHTML.trim();
+        if (content === '{{INTERNAL_LINKS}}' || content === '') {
+            internalLinksSection.style.display = 'none';
+        }
+    }
+
     // --- Theme Management ---
     themeToggle.addEventListener('click', () => {
         htmlEl.classList.toggle('dark');

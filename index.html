@@ -72,8 +72,8 @@
     <main class="flex-grow flex flex-col lg:flex-row overflow-hidden h-[calc(100vh-4rem)]">
 
         <!-- Left Sidebar: Tools & Library -->
-        <aside
-            class="w-full lg:w-80 border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-y-auto hidden lg:flex flex-col flex-shrink-0">
+        <aside id="sidebar-devices"
+            class="w-full lg:w-80 border-t lg:border-t-0 lg:border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-y-auto hidden lg:flex flex-col flex-shrink-0 order-3 lg:order-1 h-[45vh] lg:h-auto z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] lg:shadow-none">
             <div class="p-4 border-b border-gray-200 dark:border-gray-800">
                 <h2 class="font-semibold mb-4">Device Library</h2>
 
@@ -90,7 +90,7 @@
         </aside>
 
         <!-- Center: Canvas / Workspace -->
-        <div class="flex-grow bg-gray-100 dark:bg-gray-950 relative flex flex-col min-w-0">
+        <div id="center-pane" class="flex-grow bg-gray-100 dark:bg-gray-950 relative flex flex-col min-w-0 order-1">
 
             <!-- Upload Overlay -->
             <div id="upload-overlay"
@@ -136,23 +136,24 @@
                 <canvas id="preview-canvas" class="max-w-full max-h-full object-contain shadow-xl rounded-sm"></canvas>
             </div>
 
-            <!-- Mobile Toggle Bar -->
-            <div id="mobile-controls-bar"
-                class="hidden lg:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-2 flex justify-around">
-                <button class="p-2 flex flex-col items-center text-blue-600">
-                    <i data-lucide="smartphone" class="w-5 h-5"></i>
-                    <span class="text-[10px] mt-1 font-medium">Device</span>
-                </button>
-                <button class="p-2 flex flex-col items-center text-gray-500 dark:text-gray-400">
-                    <i data-lucide="sliders" class="w-5 h-5"></i>
-                    <span class="text-[10px] mt-1 font-medium">Adjust</span>
-                </button>
-            </div>
+        </div>
+
+        <!-- Mobile Toggle Bar -->
+        <div id="mobile-controls-bar"
+            class="hidden shrink-0 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-1 flex justify-around order-2 lg:hidden z-20">
+            <button id="tab-devices" class="p-2 flex flex-col items-center text-blue-600 dark:text-blue-400 w-1/2">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                <span class="text-[10px] mt-1 font-medium">Device</span>
+            </button>
+            <button id="tab-controls" class="p-2 flex flex-col items-center text-gray-500 w-1/2">
+                <i data-lucide="sliders" class="w-5 h-5"></i>
+                <span class="text-[10px] mt-1 font-medium">Adjust</span>
+            </button>
         </div>
 
         <!-- Right Sidebar: Settings & Export -->
-        <aside
-            class="w-full lg:w-80 border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-y-auto hidden lg:flex flex-col flex-shrink-0">
+        <aside id="sidebar-controls"
+            class="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-y-auto hidden lg:flex flex-col flex-shrink-0 order-4 lg:order-3 h-[45vh] lg:h-auto z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] lg:shadow-none">
 
             <div class="p-4 border-b border-gray-200 dark:border-gray-800">
                 <h2 class="font-semibold mb-4 text-sm uppercase tracking-wider text-gray-500">Watermark Controls</h2>

@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const workspaceContainer = document.getElementById('workspace-container');
     const canvasEl = document.getElementById('preview-canvas');
 
+    // Layout Elements
+    const sidebarDevices = document.getElementById('sidebar-devices');
+    const sidebarControls = document.getElementById('sidebar-controls');
+    const mobileControlsBar = document.getElementById('mobile-controls-bar');
+    const tabDevices = document.getElementById('tab-devices');
+    const tabControls = document.getElementById('tab-controls');
+
     // Sidebar Elements
     const deviceListContainer = document.getElementById('device-list-container');
     const deviceSearch = document.getElementById('device-search');
@@ -41,6 +48,32 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggle.addEventListener('click', () => {
         htmlEl.classList.toggle('dark');
         // Save preference could be added here
+    });
+
+    // --- Mobile Tab Management ---
+    function activateMobileTab(tab) {
+        [tabDevices, tabControls].forEach(t => {
+            t.classList.remove('text-blue-600', 'dark:text-blue-400');
+            t.classList.add('text-gray-500', 'dark:text-gray-400');
+        });
+        tab.classList.remove('text-gray-500', 'dark:text-gray-400');
+        tab.classList.add('text-blue-600', 'dark:text-blue-400');
+    }
+
+    tabDevices.addEventListener('click', () => {
+        sidebarDevices.classList.remove('hidden');
+        sidebarDevices.classList.add('flex');
+        sidebarControls.classList.remove('flex');
+        sidebarControls.classList.add('hidden');
+        activateMobileTab(tabDevices);
+    });
+
+    tabControls.addEventListener('click', () => {
+        sidebarControls.classList.remove('hidden');
+        sidebarControls.classList.add('flex');
+        sidebarDevices.classList.remove('flex');
+        sidebarDevices.classList.add('hidden');
+        activateMobileTab(tabControls);
     });
 
     // --- Initialization ---
@@ -141,6 +174,17 @@ document.addEventListener('DOMContentLoaded', () => {
             workspaceContainer.classList.remove('hidden');
             workspaceContainer.classList.add('flex');
             btnExport.disabled = false;
+
+            // Mobile UI logic: show devices sidebar initially
+            mobileControlsBar.classList.remove('hidden');
+            mobileControlsBar.classList.add('flex');
+
+            sidebarDevices.classList.remove('hidden');
+            sidebarDevices.classList.add('flex');
+            sidebarControls.classList.remove('flex');
+            sidebarControls.classList.add('hidden');
+            activateMobileTab(tabDevices);
+
         }).catch(err => {
             alert("Error loading image.");
             console.error(err);

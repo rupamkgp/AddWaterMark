@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sidebar Elements
     const deviceListContainer = document.getElementById('device-list-container');
     const deviceSearch = document.getElementById('device-search');
+    const mobileDeviceSelect = document.getElementById('mobile-device-select');
 
     // Controls Elements
     const ownerNameInput = document.getElementById('owner-name');
@@ -49,6 +50,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Device Selection Logic ---
     function initDeviceList() {
         renderDeviceList(DEVICELIST);
+
+        // Populate Mobile Dropdown
+        const grouped = getDevicesByBrand();
+        Object.keys(grouped).forEach(brand => {
+            const optgroup = document.createElement('optgroup');
+            optgroup.label = brand;
+            grouped[brand].forEach(device => {
+                const opt = document.createElement('option');
+                opt.value = device.id;
+                opt.textContent = device.name;
+                if (device.id === activeDeviceId) opt.selected = true;
+                optgroup.appendChild(opt);
+            });
+            mobileDeviceSelect.appendChild(optgroup);
+        });
+
+        mobileDeviceSelect.addEventListener('change', (e) => {
+            const selectedId = e.target.value;
+            const device = DEVICELIST.find(d => d.id === selectedId);
+            if (device) {
+                activeDeviceId = device.id;
+                engine.updateSetting('device', device);
+                renderDeviceList(DEVICELIST); // Sync desktop visual state
+            }
+        });
 
         // Search functionality
         deviceSearch.addEventListener('input', (e) => {
@@ -107,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.addEventListener('click', () => {
                     activeDeviceId = device.id;
                     engine.updateSetting('device', device);
+                    if (mobileDeviceSelect) mobileDeviceSelect.value = device.id; // Sync mobile select
                     renderDeviceList(DEVICELIST); // Re-render list to update active UI state
                     lucide.createIcons(); // Re-init icons for the new active tick
                 });

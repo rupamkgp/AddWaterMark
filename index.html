@@ -65,7 +65,7 @@
     </header>
 
     <!-- Main Workspace -->
-    <main class="flex-grow flex flex-col lg:flex-row overflow-hidden h-[calc(100vh-4rem)]">
+    <main class="flex-grow flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-4rem)] overflow-y-auto lg:overflow-hidden">
 
         <!-- Left Sidebar: Tools & Library -->
         <aside
@@ -86,7 +86,8 @@
         </aside>
 
         <!-- Center: Canvas / Workspace -->
-        <div class="flex-grow bg-gray-100 dark:bg-gray-950 relative flex flex-col min-w-0">
+        <div
+            class="flex-grow bg-gray-100 dark:bg-gray-950 relative flex flex-col min-w-0 min-h-[65vh] lg:min-h-0 border-b lg:border-b-0 border-gray-200 dark:border-gray-800">
 
             <!-- Upload Overlay -->
             <div id="upload-overlay"
@@ -132,26 +133,24 @@
                 <canvas id="preview-canvas" class="max-w-full max-h-full object-contain shadow-xl rounded-sm"></canvas>
             </div>
 
-            <!-- Mobile Toggle Bar -->
-            <div id="mobile-controls-bar"
-                class="hidden lg:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-2 flex justify-around">
-                <button class="p-2 flex flex-col items-center text-blue-600">
-                    <i data-lucide="smartphone" class="w-5 h-5"></i>
-                    <span class="text-[10px] mt-1 font-medium">Device</span>
-                </button>
-                <button class="p-2 flex flex-col items-center text-gray-500 dark:text-gray-400">
-                    <i data-lucide="sliders" class="w-5 h-5"></i>
-                    <span class="text-[10px] mt-1 font-medium">Adjust</span>
-                </button>
-            </div>
+
         </div>
 
         <!-- Right Sidebar: Settings & Export -->
         <aside
-            class="w-full lg:w-80 border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-y-auto hidden lg:flex flex-col flex-shrink-0">
+            class="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-visible lg:overflow-y-auto flex flex-col flex-shrink-0">
 
             <div class="p-4 border-b border-gray-200 dark:border-gray-800">
                 <h2 class="font-semibold mb-4 text-sm uppercase tracking-wider text-gray-500">Watermark Controls</h2>
+
+                <!-- Mobile Device Selector (Hidden on Desktop) -->
+                <div class="mb-6 block lg:hidden">
+                    <label class="block text-sm font-medium mb-1">Select Device</label>
+                    <select id="mobile-device-select"
+                        class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
 
                 <!-- Custom Text -->
                 <div class="mb-6">

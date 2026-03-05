@@ -127,8 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Only JPG and PNG images are supported.");
             return;
         }
-        if (file.size > 10 * 1024 * 1024) {
-            alert("Image size exceeds 10MB limit.");
+        if (file.size > 35 * 1024 * 1024) {
+            alert("Image size exceeds 35MB limit.");
             return;
         }
 

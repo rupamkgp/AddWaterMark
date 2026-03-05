@@ -259,51 +259,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Export Logic ---
-    btnExport.addEventListener('click', () => {
+    btnExport.addEventListener('click', async () => {
         btnExport.disabled = true;
         const originalText = btnExport.innerHTML;
         btnExport.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Processing...';
         lucide.createIcons();
 
-        // Adding a slight timeout to allow UI update before heavy base64 encode
-        setTimeout(() => {
-            try {
-                const formatStr = selectFormat.value === 'jpeg' ? 'image/jpeg' : 'image/png';
-                const dataUrl = engine.getExportUrl(formatStr);
+        // Adding a slight timeout to allow UI update before heavy encode
+        await new Promise(r => setTimeout(r, 100));
 
-                // Create temporary download link
-                const a = document.createElement('a');
-                a.href = dataUrl;
-                a.download = `addwatermark_${engine.settings.device.id}_${Date.now()}.${selectFormat.value}`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+        try {
+            const formatStr = selectFormat.value === 'jpeg' ? 'image/jpeg' : 'image/png';
+            const blob = await engine.getExportBlob(formatStr);
 
-                // Simulate export usage (mock monetisation logic)
-                const usageEl = document.querySelector('.text-green-600');
-                if (usageEl) {
-                    const currentParts = usageEl.innerText.split('/');
-                    let current = parseInt(currentParts[0]);
-                    if (current > 0) {
-                        current--;
-                        usageEl.innerText = `${current}/5`;
-                        if (current === 0) {
-                            usageEl.classList.remove('text-green-600', 'dark:text-green-400');
-                            usageEl.classList.add('text-red-500');
-                        }
-                    } else {
-                        alert("You've reached your daily limit! Upgrade to Pro for unlimited exports.");
+            // Create temporary download link
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `addwatermark_${engine.settings.device.id}_${Date.now()}.${selectFormat.value}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+            // Simulate export usage (mock monetisation logic)
+            const usageEl = document.querySelector('.text-green-600');
+            if (usageEl) {
+                const currentParts = usageEl.innerText.split('/');
+                let current = parseInt(currentParts[0]);
+                if (current > 0) {
+                    current--;
+                    usageEl.innerText = `${current}/5`;
+                    if (current === 0) {
+                        usageEl.classList.remove('text-green-600', 'dark:text-green-400');
+                        usageEl.classList.add('text-red-500');
                     }
+                } else {
+                    alert("You've reached your daily limit! Upgrade to Pro for unlimited exports.");
                 }
-            } catch (err) {
-                console.error(err);
-                alert("Failed to export image. Try a smaller file or different browser.");
-            } finally {
-                btnExport.innerHTML = originalText;
-                btnExport.disabled = false;
-                lucide.createIcons();
             }
-        }, 100);
+        } catch (err) {
+            console.error(err);
+            alert("Failed to export image. Try a smaller file or different browser.");
+        } finally {
+            btnExport.innerHTML = originalText;
+            btnExport.disabled = false;
+            lucide.createIcons();
+        }
     });
 
 });

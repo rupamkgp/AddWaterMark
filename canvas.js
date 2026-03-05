@@ -189,17 +189,15 @@ class WatermarkEngine {
         let iconWidth = iconHeight * (800 / 600); // ZEISS SVG aspect ratio
 
         if (device.icon) {
-            const blob = new Blob([device.icon], { type: 'image/svg+xml;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
+            const svgDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(device.icon);
             const svgImg = new Image();
 
             svgImg.onload = () => {
                 this.ctx.globalAlpha = 1.0;
                 this.ctx.shadowColor = 'transparent';
                 this.ctx.drawImage(svgImg, leftPadding + textWidth, mainY - (iconHeight / 2), iconWidth, iconHeight);
-                URL.revokeObjectURL(url);
             };
-            svgImg.src = url;
+            svgImg.src = svgDataUrl;
         }
 
         // 3. Draw Right Text (Camera Settings)
@@ -277,8 +275,7 @@ class WatermarkEngine {
         // 1. Draw SVG Icon
         if (device.icon) {
             // Need to create an image from SVG string to draw on canvas
-            const blob = new Blob([device.icon], { type: 'image/svg+xml;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
+            const svgDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(device.icon);
             const svgImg = new Image();
 
             svgImg.onload = () => {
@@ -290,9 +287,8 @@ class WatermarkEngine {
                 // Draw Icon centered vertically with the two lines of text
                 const iconYOffset = textY - titleFontSize + ((titleFontSize + specsFontSize) / 2) - (iconSize / 2);
                 this.ctx.drawImage(svgImg, x, iconYOffset, iconSize, iconSize);
-                URL.revokeObjectURL(url);
             };
-            svgImg.src = url;
+            svgImg.src = svgDataUrl;
 
             // Note: because image loading is async, the text draws immediately and the icon pops in a millisecond later.
             // For a robust implementation, we cash the SVG images or await them. 
@@ -328,5 +324,24 @@ class WatermarkEngine {
      */
     getExportUrl(format = 'image/jpeg', quality = 1.0) {
         return this.canvas.toDataURL(format, quality);
+    }
+
+    /**
+     * Returns a Promise that resolves with a Blob of the final composite for download
+     */
+    getExportBlob(format = 'image/jpeg', quality = 1.0) {
+        return new Promise((resolve, reject) => {
+            try {
+                this.canvas.toBlob((blob) => {
+                    if (blob) {
+                        resolve(blob);
+                    } else {
+                        reject(new Error("Canvas toBlob failed."));
+                    }
+                }, format, quality);
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 }
